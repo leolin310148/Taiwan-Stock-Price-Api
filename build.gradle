@@ -1,0 +1,51 @@
+buildscript {
+    ext {
+        springBootVersion = '1.2.5.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+group 'me.leolin'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'spring-boot'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+jar {
+    baseName = 'Stock-Price-Parsing'
+    version = ''
+}
+
+springBoot {
+    mainClass = 'me.leolin.App'
+}
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    compile.exclude module: "spring-boot-starter-tomcat"
+    compile.exclude module: "tomcat-jdbc"
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.4.4'
+    compile 'mysql:mysql-connector-java:5.1.36'
+    compile 'io.reactivex:rxjava:1.0.14'
+    compile 'io.reactivex:rxjava-async-util:0.21.0'
+    compile 'org.jsoup:jsoup:1.8.3'
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-undertow")
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
